@@ -44,8 +44,7 @@ public class TablaIntervalos extends DefaultTableModel {
             i++;
         }
         // matrizTabla[i][0]="Total"; // En la ultima fila agrega el total
-        // matrizTabla[i][1]=acumuladorFrecuenciaObservada; //Acumulador para frecuencias observadas
-        // matrizTabla[i][2]=acumuladorFrecuenciaEsperada; //Acumulador para frecuencia esperada
+     
         String[] NombresDeColumnas = new String[]{"Dia", "Rnd", "Variable Uniforme", "Clientes",
             "Nro Cliente", "Rnd Cliente", "Demanda Cliente", "Precio Cliente", "Importe Venta Cliente",
             "Cantidad Vendida", "AC Cantidad Vendida", "Sobrante", "Utilidad", "AC utilidad"
