@@ -1,25 +1,20 @@
-
-
 package sim.tp3;
 
+public class NumeroRNDTable {
 
-public class NumeroRNDTable 
-{
-    private String orden;
+    private Double rnd;
     private Double numero;
-    
-     
-    
+
     public NumeroRNDTable() {
-        
+
     }
 
-    public String getOrden() {
-        return orden;
+    public Double getRnd() {
+        return rnd;
     }
 
-    public void setOrden(String orden) {
-        this.orden = orden;
+    public void setRnd(Double rnd) {
+        this.rnd = rnd;
     }
 
     public Double getNumero() {
@@ -30,13 +25,4 @@ public class NumeroRNDTable
         this.numero = numero;
     }
 
-    public NumeroRNDTable(String orden, Double numero) {
-        this.orden = orden;
-        this.numero = numero;
-    }
-    
-    
-    
-  
-   
 }

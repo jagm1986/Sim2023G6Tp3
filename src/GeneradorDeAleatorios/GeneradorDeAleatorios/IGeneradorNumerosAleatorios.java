@@ -2,6 +2,7 @@
 package GeneradorDeAleatorios;
 
 import java.util.Random;
+import sim.tp3.NumeroRNDTable;
   
 public abstract class IGeneradorNumerosAleatorios 
 {
@@ -11,7 +12,7 @@ public abstract class IGeneradorNumerosAleatorios
          generador = new Random();
     }
   
-    public abstract double generarAleatorio();
+    public abstract NumeroRNDTable generarAleatorio();
     public abstract double valuarFuncionDeDensidad(double valorAleatorio);
     
 }

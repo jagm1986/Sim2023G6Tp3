@@ -4,8 +4,14 @@ package sim.tp3;
 import java.text.DecimalFormat;
 
 
-public class Intervalo 
+public class Cliente 
 {
+    private int nroCliente;
+    private NumeroRNDTable rndDemanda;
+    private int demandaCliente;
+    private int precioPorUnidadCliente;
+    private int importeVentaCliente;
+    
     private double valorInicio;
     private double valorFin;
     private int frecuenciaObservada ;
@@ -13,7 +19,7 @@ public class Intervalo
     
     private boolean ultimo;
         
-    public Intervalo(double valorInicio, double valorFin, int frecuenciaEsperadaCalculada, boolean esElUltimo) 
+    public Cliente(double valorInicio, double valorFin, int frecuenciaEsperadaCalculada, boolean esElUltimo) 
     {
         this.valorInicio = valorInicio;
         this.valorFin = valorFin;
@@ -23,7 +29,50 @@ public class Intervalo
     }
     
 
-    Intervalo() {}
+    Cliente() {}
+
+    public NumeroRNDTable getRndDemanda() {
+        return rndDemanda;
+    }
+
+    public void setRndDemanda(NumeroRNDTable rndDemanda) {
+        this.rndDemanda = rndDemanda;
+    }
+
+    public int getDemandaCliente() {
+        return demandaCliente;
+    }
+
+    public void setDemandaCliente(int demandaCliente) {
+        this.demandaCliente = demandaCliente;
+    }
+
+    public int getPrecioPorUnidadCliente() {
+        return precioPorUnidadCliente;
+    }
+
+    public void setPrecioPorUnidadCliente(int precioPorUnidadCliente) {
+        this.precioPorUnidadCliente = precioPorUnidadCliente;
+    }
+
+    public int getImporteVentaCliente() {
+        return importeVentaCliente;
+    }
+
+    public void setImporteVentaCliente(int importeVentaCliente) {
+        this.importeVentaCliente = importeVentaCliente;
+    }
+
+    
+    public int getNroCliente() {
+        return nroCliente;
+    }
+
+    public void setNroCliente(int nroCliente) {
+        this.nroCliente = nroCliente;
+    }
+    
+    
 
     public double getValorInicio() {
         return valorInicio;
