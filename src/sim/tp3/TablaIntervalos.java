@@ -64,8 +64,8 @@ public class TablaIntervalos extends DefaultTableModel {
                 matrizTabla[i][10] = acumuladorClientesCantidadVendida;
                 acumuladorSobrante = acumuladorSobrante - demandaXcliente;
                 matrizTabla[i][11] = acumuladorSobrante;
-                matrizTabla[i][13] = cliente.getPrecioPorUnidadCliente() * demandaXcliente;
-                ganancia = ganancia + (cliente.getPrecioPorUnidadCliente() * demandaXcliente);
+                matrizTabla[i][13] = cliente.getPrecioPorUnidadCliente() * demandaXcliente - (demandaXcliente * 30);
+                ganancia = ganancia + (cliente.getPrecioPorUnidadCliente() * demandaXcliente) -  (demandaXcliente * 30);
                 matrizTabla[i][14] = ganancia;
 
             }
@@ -79,8 +79,8 @@ public class TablaIntervalos extends DefaultTableModel {
             dia.setSobranteAC(acumuladorSobrantePorDia);
             matrizTabla[i][12] = acumuladorSobrante;
 
-            acumuladorUtilidadPorDia += ganancia;
-            dia.setUtilidad(ganancia);
+            acumuladorUtilidadPorDia += ganancia - 6000;
+            dia.setUtilidad(ganancia - 6000);
             dia.setUtilidadAC(acumuladorUtilidadPorDia);
             matrizTabla[i][15] = acumuladorUtilidadPorDia;
             i++;

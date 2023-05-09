@@ -438,9 +438,9 @@ public class Principal extends javax.swing.JFrame {
                 + Double.parseDouble(prob6.getText())
                 + Double.parseDouble(prob7.getText())
                 + Double.parseDouble(prob8.getText())
-                + Double.parseDouble(prob10.getText()) > 1) {
+                + Double.parseDouble(prob10.getText()) != 1) {
 
-            JOptionPane.showMessageDialog(new JFrame(), "La suma de las probabilidades no puede ser mayor a uno",
+            JOptionPane.showMessageDialog(new JFrame(), "La suma de las probabilidades no puede ser distinto de uno (1)",
                     "Parámetros incorrectos", JOptionPane.WARNING_MESSAGE);
             fallo = true;
 
