@@ -2,6 +2,7 @@ package sim.tp3;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
@@ -483,19 +484,10 @@ public class Principal extends javax.swing.JFrame {
             }
 
             if (fallo == false) {
-                float extremoInferior = 10, extremoSuperior = 30;
-                try {
-
-                    manejador.generarDistribucionUniforme(extremoInferior, extremoSuperior);
-                    fallo = false;
-
-                } catch (NumberFormatException e) {
-                    JOptionPane.showMessageDialog(new JFrame(), "Error al generar distribuciñon uniforme", "Error inesperado"
-                            + "", JOptionPane.WARNING_MESSAGE);
-                    fallo = true;
-                }
+           
 
             }
+            
 
             if (fallo == false) {
                 int cantidadDias = Integer.parseInt(txtN.getText());
@@ -513,6 +505,7 @@ public class Principal extends javax.swing.JFrame {
 
             }
         }
+        
     }//GEN-LAST:event_btnGenerarActionPerformed
 
     private void precio5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_precio5ActionPerformed

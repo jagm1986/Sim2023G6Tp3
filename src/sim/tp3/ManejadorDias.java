@@ -42,8 +42,6 @@ public class ManejadorDias {
         this.numerosGenerados = numerosGenerados;
     }
 
-   
-
     public ArrayList<Dia> getIntervalos() {
         return dias;
     }
@@ -74,15 +72,36 @@ public class ManejadorDias {
 
         for (int i = 0; i < cantidadDias; i++) {
 
+            int extremoInferior = 10, extremoSuperior = 30;
+            TablaDemanda tablaDemandaV2 = new TablaDemanda();
+            List<Demanda> listaDemandasV2 = new ArrayList<>();
+            Double probabilidadACV2 = 0d;
+            double probabilidad = 0.0476d;
+            double probabilidadAC = 0;
+
+            for (int j = 10; j < 31; j++) {
+                probabilidadAC += probabilidad;
+                Demanda demanda = null;
+                demanda = new Demanda(j, j, probabilidad, probabilidadAC);
+                listaDemandasV2.add(demanda);
+
+                if (j == 30) {
+                    break;
+                }
+            }
+
+            tablaDemandaV2.setDemandaPastelitos(listaDemandasV2);
+
+            Random rndV2 = new Random();
+
             // voy creando los dias 
             dia = new Dia();
             dia.setNroDia(i);
             NumeroRNDTable numeroRNDTable = new NumeroRNDTable();
-            numeroRNDTable.setRnd(numerosGenerados.get(i).getRnd());
-            numeroRNDTable.setNumero(numerosGenerados.get(i).getNumero());
+            numeroRNDTable.setRnd(rndV2.nextDouble());
             dia.setRndCantidadClientes(numeroRNDTable);
-            Long cantidadClientes = numeroRNDTable.getNumero().longValue();
-            dia.setCantidadClientes(cantidadClientes);
+            Integer cantidadClientes = calcularDemanda(rndV2.nextDouble(), tablaDemandaV2).getDemanda();
+            dia.setCantidadClientes(cantidadClientes.longValue());
 
             List<Cliente> clientes = new ArrayList<>();
             for (int j = 0; j < cantidadClientes; j++) {
@@ -92,8 +111,8 @@ public class ManejadorDias {
                 Random rnd = new Random();
                 numeroRNDTableCliente.setNumero(rnd.nextDouble());
                 cliente.setRndDemanda(numeroRNDTableCliente);
-                cliente.setDemandaCliente(calcularDemanda(numeroRNDTableCliente.getNumero()).getDemanda());
-                cliente.setPrecioPorUnidadCliente(calcularDemanda(numeroRNDTableCliente.getNumero()).getPrecio());
+                cliente.setDemandaCliente(calcularDemanda(numeroRNDTableCliente.getNumero(), null).getDemanda());
+                cliente.setPrecioPorUnidadCliente(calcularDemanda(numeroRNDTableCliente.getNumero(), null).getPrecio());
 
                 clientes.add(cliente);
 
@@ -106,25 +125,45 @@ public class ManejadorDias {
 
     }
 
-    public Demanda calcularDemanda(double numeroAleatorio) {
-        tablaDemanda.getDemandaPastelitos().sort(Comparator.comparing(Demanda::getDemanda));
-        acumularDemanda(tablaDemanda.getDemandaPastelitos());
-        for (int i = 0; i < tablaDemanda.getDemandaPastelitos().size(); i++) {
+    public Demanda calcularDemanda(double numeroAleatorio, TablaDemanda tablaDemandaV2) {
+        if (tablaDemandaV2 == null) {
+            tablaDemanda.getDemandaPastelitos().sort(Comparator.comparing(Demanda::getDemanda));
+            acumularDemanda(tablaDemanda.getDemandaPastelitos());
+            for (int i = 0; i < tablaDemanda.getDemandaPastelitos().size(); i++) {
 
-            Demanda demanda = tablaDemanda.getDemandaPastelitos().get(i);
-            Demanda anterior = null;
-            if (i != 0) {
-                anterior = tablaDemanda.getDemandaPastelitos().get(i - 1);
-                if (numeroAleatorio < demanda.getProbabilidadAC() && (numeroAleatorio > anterior.getProbabilidadAC())) {
+                Demanda demanda = tablaDemanda.getDemandaPastelitos().get(i);
+                Demanda anterior = null;
+                if (i != 0) {
+                    anterior = tablaDemanda.getDemandaPastelitos().get(i - 1);
+                    if (numeroAleatorio < demanda.getProbabilidadAC() && (numeroAleatorio > anterior.getProbabilidadAC())) {
+                        return demanda;
+                    }
+                }
+
+                if (numeroAleatorio < demanda.getProbabilidadAC()) {
                     return demanda;
                 }
-            }
 
-            if (numeroAleatorio < demanda.getProbabilidadAC()) {
-                return demanda;
             }
+        } else {
+            for (int i = 0; i < tablaDemandaV2.getDemandaPastelitos().size(); i++) {
 
+                Demanda demanda = tablaDemandaV2.getDemandaPastelitos().get(i);
+                Demanda anterior = null;
+                if (i != 0) {
+                    anterior = tablaDemandaV2.getDemandaPastelitos().get(i - 1);
+                    if (numeroAleatorio < demanda.getProbabilidadAC() && (numeroAleatorio > anterior.getProbabilidadAC())) {
+                        return demanda;
+                    }
+                }
+
+                if (numeroAleatorio < demanda.getProbabilidadAC()) {
+                    return demanda;
+                }
+
+            }
         }
+
         return new Demanda();
 
     }

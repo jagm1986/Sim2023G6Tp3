@@ -43,8 +43,7 @@ public class TablaIntervalos extends DefaultTableModel {
 
             matrizTabla[i][0] = dia.getNroDia() + 1;//Nro dia
             matrizTabla[i][1] = dia.getRndCantidadClientes().getRnd();// random clientes
-            matrizTabla[i][2] = dia.getRndCantidadClientes().getNumero();// random clientes
-            matrizTabla[i][3] = dia.getCantidadClientes();// cantidad de clientes con distribucion uniforme
+            matrizTabla[i][2] = dia.getCantidadClientes();// cantidad de clientes con distribucion uniforme
             int produccion = 200;
             long ganancia = 0;
             acumuladorSobrante = produccion;
@@ -53,20 +52,20 @@ public class TablaIntervalos extends DefaultTableModel {
                 i++;
                 int j = cliente.getNroCliente();
                 int demandaXcliente = cliente.getDemandaCliente() <= 200 ? cliente.getDemandaCliente() : 200;
-                matrizTabla[i][4] = j;
-                matrizTabla[i][5] = cliente.getRndDemanda().getNumero();
-                matrizTabla[i][6] = demandaXcliente;
-                matrizTabla[i][7] = cliente.getPrecioPorUnidadCliente();
-                matrizTabla[i][8] = cliente.getPrecioPorUnidadCliente() * demandaXcliente;
+                matrizTabla[i][3] = j;
+                matrizTabla[i][4] = cliente.getRndDemanda().getNumero();
+                matrizTabla[i][5] = demandaXcliente;
+                matrizTabla[i][6] = cliente.getPrecioPorUnidadCliente();
+                matrizTabla[i][7] = cliente.getPrecioPorUnidadCliente() * demandaXcliente;
 
-                matrizTabla[i][9] = demandaXcliente;
+                matrizTabla[i][8] = demandaXcliente;
                 acumuladorClientesCantidadVendida += demandaXcliente;
-                matrizTabla[i][10] = acumuladorClientesCantidadVendida;
+                matrizTabla[i][9] = acumuladorClientesCantidadVendida;
                 acumuladorSobrante = acumuladorSobrante - demandaXcliente;
-                matrizTabla[i][11] = acumuladorSobrante;
-                matrizTabla[i][13] = cliente.getPrecioPorUnidadCliente() * demandaXcliente - (demandaXcliente * 30);
+                matrizTabla[i][10] = acumuladorSobrante;
+                matrizTabla[i][12] = cliente.getPrecioPorUnidadCliente() * demandaXcliente - (demandaXcliente * 30);
                 ganancia = ganancia + (cliente.getPrecioPorUnidadCliente() * demandaXcliente) -  (demandaXcliente * 30);
-                matrizTabla[i][14] = ganancia;
+                matrizTabla[i][13] = ganancia;
 
             }
             dia.setCantidadVendida(acumuladorClientesCantidadVendida);
@@ -77,12 +76,12 @@ public class TablaIntervalos extends DefaultTableModel {
             acumuladorSobrantePorDia += acumuladorSobrante;
             dia.setSobrante(acumuladorSobrante);
             dia.setSobranteAC(acumuladorSobrantePorDia);
-            matrizTabla[i][12] = acumuladorSobrante;
+            matrizTabla[i][11] = acumuladorSobrante;
 
-            acumuladorUtilidadPorDia += ganancia - 6000;
-            dia.setUtilidad(ganancia - 6000);
+            acumuladorUtilidadPorDia += ganancia;
+            dia.setUtilidad(acumuladorUtilidadPorDia);
             dia.setUtilidadAC(acumuladorUtilidadPorDia);
-            matrizTabla[i][15] = acumuladorUtilidadPorDia;
+            matrizTabla[i][14] = dia.getUtilidadAC();
             i++;
         }
         double promedioSobrante = filasTabla.get(filasTabla.size() - 1).getSobranteAC() / filasTabla.size();
@@ -94,9 +93,9 @@ public class TablaIntervalos extends DefaultTableModel {
         this.promedioUtilidadTotal = promedioUtilidad;
         matrizTabla[i][0] = "Utilidad promedio por dia: " + promedioUtilidad; // En la ultima fila agrega el total
 
-        String[] NombresDeColumnas = new String[]{"Dia", "Rnd", "Variable Uniforme", "Clientes",
+        String[] NombresDeColumnas = new String[]{"Dia", "Rnd", "Clientes",
             "Nro Cliente", "Rnd Cliente", "Demanda Cliente", "Precio Cliente", "Importe Venta Cliente",
-            "Pastelitos Vendidos", "Pastelitos Vendidos AC", "Sobrante", "Sobrante AC", "Utilidad", "Utilidad AC", ""
+            "Pastelitos Vendidos", "Pastelitos Vendidos AC", "Sobrante", "Sobrante AC", "Utilidad", "Utilidad AC", "Utilidad AC Total"
 
         };
 
